@@ -1,6 +1,5 @@
 if myHero.charName ~= "Ezreal" then return end
 
-local autoUpdate = true
 require "SOW"
 require "VPrediction"
 
@@ -9,34 +8,18 @@ require "VPrediction"
 
 local UPDATE_HOST      = "raw.github.com"
 local UPDATE_PATH      = "/gnomgrol/timeForATrueDisplayOfSkill/b417854906719289ed2a4d5f577cc2ffa9391ee8/timeForATrueDisplayOfSkill.lua"
+local VERSION_PATH     = 
 local UPDATE_FILE_PATH = SCRIPT_PATH..GetCurrentEnv().FILE_NAME
 local UPDATE_URL       = "https://"..UPDATE_HOST..UPDATE_PATH
 local SCRIPT_NAME      = "Time for a true display of skill"
 
-local webResult = nil
-if autoUpdate then
-    DelayAction(function() GetAsyncWebResult(UPDATE_HOST, UPDATE_PATH, function(data) webResult = data end) end, 3)
-    function updateScript()
-        if webResult then
-            local serverVersion
-            local startPos, endPos, junk = nil, nil, nil
-            junk, startPos = string.find(webResult, "local version    = ")
-            if startPos then
-                endPos, junk = string.find(webResult, "\n", startPos)
-            end
-            if endPos then
-                serverVersion = tonumber(string.sub(webResult, startPos, endPos))
-            end
-            if serverVersion and serverVersion > version then
-                DownloadFile(UPDATE_URL.."?nocache"..myHero.charName..os.clock(), UPDATE_FILE_PATH, function () print("<font color=\"#8080F0\">"..SCRIPT_NAME..": Successfully updated. (v"..version.." -> v"..serverVersion..")</font>") end)
-            elseif not serverVersion then
-                print("<font color=\"#8080F0\">"..SCRIPT_NAME..": Something went wrong! Please manually update the script!</font>")
-            end
-            webResult = nil
-        end
-    end
-    AddTickCallback(updateScript)
+local version = 0.2
+local AUTOUPDATE = true
+
+if AUTOUPDATE then
+	 SourceUpdater(SCRIPT_NAME, version, UPDATE_HOST, UPDATE_PATH, UPDATE_FILE_PATH, "/honda7/BoL/master/VersionFiles/"..SCRIPT_NAME..".version"):CheckUpdate()
 end
+
 
 
 -- ORBWALKER FUNCTION
