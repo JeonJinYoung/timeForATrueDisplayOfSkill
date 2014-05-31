@@ -2,12 +2,12 @@ if myHero.charName ~= "Ezreal" then return end
 
 require "SOW"
 require "VPrediction"
-
+require "SourceLib"
 
 -------------Updater-------------
 
 local UPDATE_HOST      = "raw.github.com"
-local UPDATE_PATH      = "/gnomgrol/timeForATrueDisplayOfSkill/b417854906719289ed2a4d5f577cc2ffa9391ee8/timeForATrueDisplayOfSkill.lua"
+local UPDATE_PATH      = "/gnomgrol/timeForATrueDisplayOfSkill/master/timeForATrueDisplayOfSkill.lua"
 local VERSION_PATH     = "/gnomgrol/timeForATrueDisplayOfSkill/master/timeForATrueDisplayOfSkill.version"
 local UPDATE_FILE_PATH = SCRIPT_PATH..GetCurrentEnv().FILE_NAME
 local UPDATE_URL       = "https://"..UPDATE_HOST..UPDATE_PATH
@@ -370,8 +370,3 @@ function Lasthitting()
 		end
 	end
 end
-
-
-
-
-
